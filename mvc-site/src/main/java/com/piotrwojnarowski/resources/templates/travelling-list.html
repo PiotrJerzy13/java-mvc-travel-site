@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Travellings</title>
+    <link href="../../../../html/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../../../../html/css/custom.css" rel="stylesheet"/>
+</head>
+<body>
+<header th:replace="menu.html :: header"/>
+<div class="container">
+    <!-- Travellings List -->
+    <div class="card border border-info border-3">
+        <div class="card-header bg-info">
+            <h2>List of Travellings</h2>
+        </div>
+        <div class="card-body bg-light">
+            <table class="table table-bordered bg-white">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Visited At</th>
+                    <th scope="col">Category</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                The following html with Thymeleaf markup generates table rows dynamically.
+                <tr th:each="travelling : ${travellingList}">
+                    <td>
+                        <a th:text="${travelling.name}" th:href="@{/travelling-details(travellingId=${travelling.id})}"/>
+                    </td>
+                    <td th:text="${travelling.location}"/>
+                    <td th:text="${travelling.visitedAt}"/>
+                    <td th:text="${travelling.category}"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Insert Form here -->
+    <div class="card border border-info border-3 mt-3">
+        <div class="card-header bg-info">
+            <h2>Create Travelling</h2>
+        </div>
+        <div class="card-body bg-light">
+            <form th:action="@{/create-travelling}" th:object="${newTravelling}" method="post"
+                  class="card-body">
+                <p class="alert-success alert" th:if="${success}" th:text="${success}">
+                    Travelling has been created successfully.
+                </p>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" th:field="*{name}"/>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" class="form-control" th:field="*{location}"/>
+                </div>
+                <div class="form-group">
+                    <label>Visited At</label>
+                    <input type="date" class="form-control" th:field="*{visitedAt}"/>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control" th:field="*{category}">
+                        <option th:value="Nature">Nature</option>
+                        <option th:value="Relaxation">Relaxation</option>
+                        <option th:value="Shopping">Shopping</option>
+                        <option th:value="Culture">Culture</option>
+                        <option th:value="Architecture">Architecture</option>
+                    </select>
+                </div>
+
+                <!-- validation errors -->
+                <ul>
+                    <li th:each="e : ${#fields.detailedErrors()}"
+                        th:class="${e.global}? 'globalerr' : 'fielderr'">
+                        <span th:text="${e.global}? '*' : ${e.fieldName}">field</span> |
+                        <span th:text="${e.message}">error</span>
+                    </li>
+                </ul>
+
+                <button type="submit" class="btn btn-primary">Create Travelling</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
