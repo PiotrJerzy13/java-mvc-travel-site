@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Travelling Details</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet"/>
+</head>
+<body>
+<header th:replace="menu.html :: header"></header>
+
+<div class="container">
+    <div class="card border border-info border-3 mt-3">
+        <div class="card-header bg-info">
+            <h2>Update Travelling Review</h2>
+        </div>
+
+        <div class="card-body bg-light">
+            <!-- ✅ Thymeleaf form bound to the model "travelling" -->
+            <form th:action="@{/update-travelling(travellingId=${travelling.id})}"
+                  th:object="${travelling}" method="post" class="card-body">
+
+                <!-- ✅ Success message (flash attribute) -->
+                <p class="alert alert-success"
+                   th:if="${success}"
+                   th:text="${success}">
+                    Review has been updated successfully.
+                </p>
+
+                <dl class="row">
+                    <dt class="col-sm-3">Name</dt>
+                    <dd class="col-sm-9" th:text="*{name}">Tower Bridge</dd>
+
+                    <dt class="col-sm-3">Location</dt>
+                    <dd class="col-sm-9" th:text="*{location}">London, United Kingdom</dd>
+
+                    <dt class="col-sm-3">Visited At</dt>
+                    <dd class="col-sm-9" th:text="*{visitedAt}">2025-01-15</dd>
+
+                    <dt class="col-sm-3">Category</dt>
+                    <dd class="col-sm-9" th:text="*{category}">Architecture</dd>
+
+                    <dt class="col-sm-3">Review</dt>
+                    <dd class="col-sm-9">
+                        <textarea class="form-control" th:field="*{review}" rows="6"
+                                  placeholder="Write or update your review here..."></textarea>
+                    </dd>
+                </dl>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
