@@ -18,4 +18,5 @@ public class Travelling {
     private LocalDate visitedAt;
     private Category category;
     private String review;
+    private Double rating;
 }

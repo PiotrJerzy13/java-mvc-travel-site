@@ -4,7 +4,7 @@ import com.piotrwojnarowski.domain.Category;
 import com.piotrwojnarowski.domain.Travelling;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

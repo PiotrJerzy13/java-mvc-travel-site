@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface TravellingRepository {
     List<Travelling> findAll();
+    Optional<Travelling> getById(long id);  // ← Returns Optional
     Travelling create(Travelling travelling);
-    Optional<Travelling> getById(long id);
     Travelling save(Travelling travelling);
 }
